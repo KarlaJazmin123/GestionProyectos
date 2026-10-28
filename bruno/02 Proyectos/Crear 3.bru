@@ -1,0 +1,26 @@
+meta {
+  name: POST proyecto 3 (201)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/api/proyectos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Proyecto 3",
+    "descripcion": "Tercer proyecto"
+  }
+}
+
+tests {
+  test("responde 201", function () { expect(res.status).to.equal(201); });
+}

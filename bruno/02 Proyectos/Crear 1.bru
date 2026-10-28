@@ -1,0 +1,30 @@
+meta {
+  name: POST proyecto 1 (201)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/proyectos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Proyecto 1",
+    "descripcion": "Primer proyecto"
+  }
+}
+
+script:post-response {
+  if (res.status === 201) bru.setVar("proyectoId", res.body.id);
+}
+
+tests {
+  test("responde 201", function () { expect(res.status).to.equal(201); });
+}

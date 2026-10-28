@@ -1,0 +1,22 @@
+meta {
+  name: POST registro datos inválidos (400)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/auth/registro
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "",
+    "password": "123"
+  }
+}
+
+tests {
+  test("responde 400", function () { expect(res.status).to.equal(400); });
+}

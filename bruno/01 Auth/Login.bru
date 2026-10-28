@@ -1,0 +1,27 @@
+meta {
+  name: POST login (200 + token)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "karla",
+    "password": "Password123"
+  }
+}
+
+script:post-response {
+  if (res.status === 200) bru.setVar("token", res.body.token);
+}
+
+tests {
+  test("responde 200", function () { expect(res.status).to.equal(200); });
+  test("devuelve token JWT", function () { expect(res.body.token).to.be.a("string"); });
+}

@@ -1,0 +1,26 @@
+meta {
+  name: POST tarea proyecto inexistente (404)
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/tareas
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "titulo": "Tarea huérfana",
+    "proyectoId": 999999
+  }
+}
+
+tests {
+  test("responde 404", function () { expect(res.status).to.equal(404); });
+}

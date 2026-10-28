@@ -1,0 +1,27 @@
+meta {
+  name: POST proyecto 4 limite alcanzado (400)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/proyectos
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "nombre": "Proyecto 4",
+    "descripcion": "Debe ser rechazado"
+  }
+}
+
+tests {
+  test("responde 400", function () { expect(res.status).to.equal(400); });
+  test("mensaje de límite", function () { expect(res.body.mensaje).to.contain("límite"); });
+}

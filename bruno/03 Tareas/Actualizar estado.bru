@@ -1,0 +1,26 @@
+meta {
+  name: PUT tarea estado (200)
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/tareas/{{tareaId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "estado": "EN_PROGRESO"
+  }
+}
+
+tests {
+  test("responde 200", function () { expect(res.status).to.equal(200); });
+  test("estado actualizado", function () { expect(res.body.estado).to.equal("EN_PROGRESO"); });
+}

@@ -1,0 +1,25 @@
+meta {
+  name: PUT tarea estado inválido (400)
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/tareas/{{tareaId}}
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "estado": "TERMINADA"
+  }
+}
+
+tests {
+  test("responde 400", function () { expect(res.status).to.equal(400); });
+}
